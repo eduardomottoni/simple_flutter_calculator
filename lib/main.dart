@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_calculator/flutter_simple_calculator.dart';
 
@@ -10,15 +11,18 @@ class RunMyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp( // materialApp with debugbanner false
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green), // default theme
+      theme: ThemeData(primarySwatch: Colors.lightBlue), // default theme
       home: Scaffold( // scaffold allows set appbar and it title
         appBar: AppBar(
-          title: const Text('SimpleCalculator'),
+          title: const Text('Eduardo Calculator'),
         ),
-        body: SizedBox(
-          width: double.infinity, // width of the sizedbox.
+        body: const SizedBox(
+          width: double.infinity,
           child: Calc(), // sizedbox taking class Calc
         ),
+        // bottomNavigationBar: const SimpleDialog(
+          // children: [],
+        // ),
       ),
     );
   }
@@ -38,7 +42,7 @@ class _CalcState extends State<Calc> {
     var calc = SimpleCalculator( // SimpleCalculator widget to allow us to set it parameters
       value: _currentValue!, // value is to currentValue
       hideExpression: false,
-      hideSurroundingBorder: true,
+      hideSurroundingBorder: false,
       autofocus: true,
       onChanged: (key, value, expression) {
         setState(() { // setState method call everytime when every changes occur
@@ -46,21 +50,24 @@ class _CalcState extends State<Calc> {
         });
       },
       theme: const CalculatorThemeData( // setting the theme of the calculator
-        borderColor: Colors.black,
-        borderWidth: 2,
-        displayColor: Colors.black54,
+        borderColor: Color.fromRGBO(100, 100, 100, 200),
+        borderWidth: 10,
+        displayColor: Colors.white,
         displayStyle:
-        TextStyle(fontSize: 80, color: Color.fromARGB(255, 18, 218, 24)),
-        expressionColor: Colors.indigo,
+        TextStyle(fontSize: 200, color: Color.fromARGB(255, 0, 0, 0)),
+        expressionColor: Color.fromRGBO(200, 200, 255, 255),
         expressionStyle: TextStyle(fontSize: 20, color: Colors.white),
-        operatorColor: Color.fromARGB(255, 130, 192, 85),
+        operatorColor: Colors.blueAccent,
         operatorStyle: TextStyle(fontSize: 30, color: Colors.white),
-        commandColor: Colors.orange,
+        commandColor: Colors.grey,
         commandStyle: TextStyle(fontSize: 30, color: Colors.white),
-        numColor: Colors.grey,
-        numStyle: TextStyle(fontSize: 50, color: Colors.white),
+        numColor: Colors.white,
+        numStyle: TextStyle(fontSize: 50, color: Colors.black),
       ),
     );
+    if (kDebugMode) {
+      print(_currentValue);
+    }
     return SafeArea(child: calc); // showing the calculator
   }
 }
